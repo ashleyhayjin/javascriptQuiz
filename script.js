@@ -1,20 +1,27 @@
-var buttonChoices = document.querySelector(".choices");
 var startButton = document.getElementById("start-btn");
 var timerEl = document.getElementById("timerText");
 var answerButtons = document.querySelectorAll(".answer-btn");
-
 //Starts Game
-startButton.addEventListener("click", startGame);
 
-function init() {
-  answerButtons.classList.add("hide");
-  startGame();
-}
+// function init() {
+//   answerButtons.classList.add("hide");
+//   // startGame();
+// }
+// startButton.onclick = startGame();
 
-//Starting Game Function 
+//Starting Game Function
 function startGame() {
-  startButton.classList.add("hide");
-}
+  var startEl = document.getElementById("answer-choices");
+  startEl.setAttribute("class", "hide");
+  answerButtons.removeAttribute("class");
+};
+
+
+startButton.onclick = startGame();
+
+// startButton.addEventListener("click", startGame)
+console.log(startGame());
+
 var timeLeft = 60;
 
 function setTimer() {
