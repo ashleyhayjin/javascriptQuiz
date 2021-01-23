@@ -3,25 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h3 class="viewHighScore">High Scores</h3>
-      <div id="timer">
-        <h3 id="timerText">Seconds Remaining</h3>
+    <div class="container-quiz">
+      <div class="question-container">
+          <h2 class="timer"></h2>
+        <h1 class="question-display">Code Quiz</h1>
+        <p id="hide-p">
+          You'll be taking a quiz in the browser to test your javascript
+          knowledge! Beware, if you miss a question, you'll lose time on your
+          total remaining time.
+        </p>
       </div>
-      <h2 id="opening-msg">You will be taking a Javascript Quiz.</h2>
-      <h3 class="question"></h3>
-      <div id="answer-choices">
-        <button class="answer-btn">A</button>
-        <button class="answer-btn">B</button>
-        <button class="answer-btn">C</button>
-        <button class="answer-btn">D</button>
+
+      <div id="button-hidden" class="button-container hide">
+        <button class="answer-choices A"></button>
+        <button class="answer-choices B"></button>
+        <button class="answer-choices C"></button>
       </div>
-      <div class="startbutton">
-        <button id="start-btn" class="start-btn">Start</button>
+
+      <div id="start-btn-container">
+        <button class="start-btn">Start</button>
       </div>
     </div>
 
