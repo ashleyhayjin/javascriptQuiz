@@ -9,8 +9,8 @@
   <body>
     <div class="container-quiz">
       <div class="question-container">
-          <h2 class="timer"></h2>
-        <h1 class="question-display">Code Quiz</h1>
+        <h2 class="timer"></h2>
+        <h1 id="question-display">Code Quiz</h1>
         <p id="hide-p">
           You'll be taking a quiz in the browser to test your javascript
           knowledge! Beware, if you miss a question, you'll lose time on your
@@ -18,12 +18,18 @@
         </p>
       </div>
 
-      <div id="button-hidden" class="button-container hide">
-        <button class="answer-choices A"></button>
-        <button class="answer-choices B"></button>
-        <button class="answer-choices C"></button>
-      </div>
+      <div id="button-hidden" class="button-container hide"></div>
+      <div class="quiz-container">
+        <div id="question-reveal"></div>
+        <div id="answer-btn">
+          <!-- 
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button> -->
 
+        </div>
+      </div>
       <div id="start-btn-container">
         <button class="start-btn">Start</button>
       </div>

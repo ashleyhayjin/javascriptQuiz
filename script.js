@@ -2,38 +2,36 @@
 var allQuestions = [
   {
     question: "Where do you link a javascript sheet into html?",
-    choiceA: "at the top in the <head> element",
-    choiceB: "right above the closing </body> element",
-    choiceC: "right below the Css stylsheet",
-    rightAnswer: "choice B",
+    choices: [
+      "at the top in the <head> element",
+      "right above the closing </body> element",
+      "right below the Css stylesheet",
+    ],
+    rightAnswer: "right above the closing </body> element",
   },
   {
     question: "What does the DOM stand for?",
-    choiceA: "Document On Model",
-    choiceB: "Document Object Mobile",
-    choiceC: "Document Object Model",
-    rightAnswer: "choice C",
+    choices: [
+      "Document On Model",
+      "Document Object Mobile",
+      "Document Object Model",
+    ],
+    rightAnswer: "Document Object Model",
   },
   {
     question: "What type of brackets are objects nested into?",
-    choiceA: "{}",
-    choiceB: "[]",
-    choiceC: "()",
-    rightAnswer: "choice A",
+    choices: ["{}", "[]", "()"],
+    rightAnswer: "{}",
   },
   {
     question: "How do you define a variable on javascript?",
-    choiceA: "var x;",
-    choiceB: "x;",
-    choiceC: "var = x;",
-    rightAnswer: "choice A",
+    choices: ["var x", "x", "var = x"],
+    rightAnswer: "var x",
   },
   {
     question: "What loops are used in Javascript?",
-    choiceA: "For",
-    choiceB: "While",
-    choiceC: "Both",
-    rightAnswer: "choice C",
+    choices: ["For", "While", "Both"],
+    rightAnswer: "Both",
   },
 ];
 
@@ -54,12 +52,11 @@ var answerChoices = document.getElementById("button-hidden");
 var p = document.getElementById("hide-p");
 var timerInterval;
 var questionText = document.querySelector(".question-display");
-var buttonA = document.querySelector(".A");
-var buttonB = document.querySelector(".B");
-var buttonC = document.querySelector(".C");
+
 //start Game
 startButton.addEventListener("click", startGame);
 
+//timer
 function timer() {
   timerInterval = setInterval(function () {
     timeLeft--;
@@ -77,12 +74,51 @@ function hideElements() {
 }
 
 function revealQuestion() {
-  for (var i = 0; i < allQuestions.length; i++) {
-    questionText.textContent = allQuestions[i].question;
-    buttonA.textContent = allQuestions[i].choiceA;
-    buttonB.textContent = allQuestions[i].choiceB;
-    buttonC.textContent = allQuestions[i].choiceC;
+  //displays question
+  document.getElementById("question-display").innerHTML = "";
+  var questions = document.createElement("h1");
+  var currentQuestion = allQuestions[questionIndex].question;
+  questions.textContent = currentQuestion;
+
+  var questionDisplay = document.getElementById("question-reveal");
+  questionDisplay.appendChild(questions);
+
+  var answerChoice = allQuestions[questionIndex].choices;
+  //choices buttons
+  for (var i = 0; i < answerChoice.length; i++) {
+    var choicesButtons = document.createElement("button");
+    var displayButton = document.getElementById("answer-btn");
+    displayButton.appendChild(choicesButtons);
+    choicesButtons.textContent = answerChoice[i];
+    choicesButtons.onclick = answerCheck;
   }
+}
+
+function answerCheck() {
+  var correctAnswer = allQuestions[questionIndex].rightAnswer;
+  userPick = this.innerHTML;
+
+  if (userPick === correctAnswer) {
+    console.log("response :", " You got it right!");
+  } else if (userPick !== correctAnswer) {
+    console.log("response:", "You got it wrong");
+    timeOff();
+  }
+  questionIndex++;
+  if (questionIndex === allQuestions.length) {
+    console.log("Here's your score");
+  }
+
+  revealQuestion();
+};
+
+function hideQuestion (){
+
+
+}
+
+function timeOff() {
+  timeLeft -= 15;
 }
 
 function startGame() {
@@ -90,3 +126,5 @@ function startGame() {
   hideElements();
   revealQuestion();
 }
+// counter for current question, every time you go to the next questions i++, at the end there's a prompt to save their score as well to
+//localstorage. Dynamically inside the DOM
