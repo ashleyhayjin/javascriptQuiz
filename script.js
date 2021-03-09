@@ -35,96 +35,33 @@ var allQuestions = [
   },
 ];
 
-//score tracking
-var score = 0;
-var questionIndex = 0;
-var finalQuestionIndex = allQuestions.length;
+var startBtn = document.querySelector(".startbtn");
+var startDiv = document.querySelector(".start-game");
+var gameDiv = document.getElementById("game-div");
+var choicesButtons = document.getElementById("answerChoicesDisplay");
+startBtn.addEventListener("click", startGame);
 
-//timer variables
-// var timer = document.querySelector("");
-var timeLeft = 75;
-var startTime = 0;
-var timerEl = document.querySelector(".timer");
-
-//variables
-var startButton = document.querySelector(".start-btn");
-var answerChoices = document.getElementById("button-hidden");
-var p = document.getElementById("hide-p");
-var timerInterval;
-var questionText = document.querySelector(".question-display");
-
-//start Game
-startButton.addEventListener("click", startGame);
-
-//timer
-function timer() {
-  timerInterval = setInterval(function () {
-    timeLeft--;
-    timerEl.textContent = timeLeft + " seconds remaining.";
-    if (timeLeft <= 0) {
-      timerEl.textContent = "Game is Over";
-    }
-  }, 1000);
+function startGame (){
+  startDiv.classList.add("hide");
+  displayQuestion();
 }
 
-function hideElements() {
-  startButton.classList.add("hide");
-  answerChoices.classList.remove("hide");
-  p.classList.add("hide");
+console.log(allQuestions.length);
+function displayQuestion (){
+  for(i = 0; i < 1; i++){
+    var questionGame = document.createElement("p");
+    questionGame.textContent = allQuestions[i].question;
+    gameDiv.appendChild(questionGame);
+    var answerChoiceBtn1 = document.createElement("button");
+    var answerChoiceBtn2 = document.createElement("button");
+    var answerChoiceBtn3 = document.createElement("button");
+    answerChoiceBtn1.textContent = allQuestions[i].choices[0];
+    answerChoiceBtn2.textContent = allQuestions[i].choices[1];
+    answerChoiceBtn3.textContent = allQuestions[i].choices[2];
+    choicesButtons.appendChild(answerChoiceBtn1);
+    choicesButtons.appendChild(answerChoiceBtn2);
+    choicesButtons.appendChild(answerChoiceBtn3);
+
+    if(answerChoiceBtn1.addEventListener("click", function() || )
+  }; 
 }
-
-function revealQuestion() {
-  //displays question
-  document.getElementById("question-display").innerHTML = "";
-  var questions = document.createElement("h1");
-  var currentQuestion = allQuestions[questionIndex].question;
-  questions.textContent = currentQuestion;
-
-  var questionDisplay = document.getElementById("question-reveal");
-  questionDisplay.appendChild(questions);
-
-  var answerChoice = allQuestions[questionIndex].choices;
-  //choices buttons
-  for (var i = 0; i < answerChoice.length; i++) {
-    var choicesButtons = document.createElement("button");
-    var displayButton = document.getElementById("answer-btn");
-    displayButton.appendChild(choicesButtons);
-    choicesButtons.textContent = answerChoice[i];
-    choicesButtons.onclick = answerCheck;
-  }
-}
-
-function answerCheck() {
-  var correctAnswer = allQuestions[questionIndex].rightAnswer;
-  userPick = this.innerHTML;
-
-  if (userPick === correctAnswer) {
-    console.log("response :", " You got it right!");
-  } else if (userPick !== correctAnswer) {
-    console.log("response:", "You got it wrong");
-    timeOff();
-  }
-  questionIndex++;
-  if (questionIndex === allQuestions.length) {
-    console.log("Here's your score");
-  }
-
-  revealQuestion();
-};
-
-function hideQuestion (){
-
-
-}
-
-function timeOff() {
-  timeLeft -= 15;
-}
-
-function startGame() {
-  timer();
-  hideElements();
-  revealQuestion();
-}
-// counter for current question, every time you go to the next questions i++, at the end there's a prompt to save their score as well to
-//localstorage. Dynamically inside the DOM

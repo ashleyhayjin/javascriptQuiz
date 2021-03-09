@@ -8,23 +8,3 @@
 8. When there are no more questions or the timer reaches 0, the game is over.
 9. When the game is over, the user can save their initials in the score. 
 10. The initials show each time for all the different users who've played the game. 
-
-
-Molly Soufrine to Everyone (6:28 PM)
-// hide start screen
-  var startScreenEl = document.getElementById("start-screen");
-  startScreenEl.setAttribute("class", "hide");
-
-  // un-hide questions section
-  questionsEl.removeAttribute("class");
-Molly Soufrine to Everyone (6:49 PM)
-{
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
-  },
-var currentQuestionIndex = 0;
-var currentQuestion = questions[currentQuestionIndex];
-Molly Soufrine to Everyone (6:53 PM)
-var titleEl = document.getElementById("question-title");
-  titleEl.textContent = currentQuestion.title;
