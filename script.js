@@ -38,30 +38,62 @@ var allQuestions = [
 var startBtn = document.querySelector(".startbtn");
 var startDiv = document.querySelector(".start-game");
 var gameDiv = document.getElementById("game-div");
+var secondsRemaining = 75;
 var choicesButtons = document.getElementById("answerChoicesDisplay");
+var currentIndex = 0;
+var userChoice;
 startBtn.addEventListener("click", startGame);
 
-function startGame (){
+function startGame() {
   startDiv.classList.add("hide");
+  startTimer()
+}
+
+function startTimer(){
   displayQuestion();
+  timer = setInterval(function(){
+    secondsRemaining -= 1;
+  
+    var timerDisplay = document.getElementById("timer-display");
+    timerDisplay.textContent = secondsRemaining;
+
+  }, 1000);
 }
 
 console.log(allQuestions.length);
-function displayQuestion (){
-  for(i = 0; i < 1; i++){
-    var questionGame = document.createElement("p");
-    questionGame.textContent = allQuestions[i].question;
-    gameDiv.appendChild(questionGame);
-    var answerChoiceBtn1 = document.createElement("button");
-    var answerChoiceBtn2 = document.createElement("button");
-    var answerChoiceBtn3 = document.createElement("button");
-    answerChoiceBtn1.textContent = allQuestions[i].choices[0];
-    answerChoiceBtn2.textContent = allQuestions[i].choices[1];
-    answerChoiceBtn3.textContent = allQuestions[i].choices[2];
-    choicesButtons.appendChild(answerChoiceBtn1);
-    choicesButtons.appendChild(answerChoiceBtn2);
-    choicesButtons.appendChild(answerChoiceBtn3);
 
-    if(answerChoiceBtn1.addEventListener("click", function() || )
-  }; 
+function displayQuestion() {
+  gameDiv.innerHTML= "";
+  choicesButtons.innerHTML="";
+  var questionTitle = document.createElement("h1");
+  var currentQuestion = allQuestions[currentIndex].question;
+  questionTitle.textContent = currentQuestion;
+  gameDiv.appendChild(questionTitle);
+  var choices = allQuestions[currentIndex].choices;
+  for(i=0; i<choices.length; i++){
+    var choicesEl = document.createElement("button");
+    choicesButtons.appendChild(choicesEl);
+    choicesEl.textContent = choices[i]
+    choicesEl.onclick = checkAnswer;
+  };
 }
+
+function checkAnswer(){
+  var answer = allQuestions[currentIndex].rightAnswer;
+  console.log(this.textContent);
+  userChoice = this.textContent;  
+  if(userChoice === answer){
+    console.log("yas");
+    secondsRemaining += 15;
+  }
+  else{
+    console.log("oof.");
+    secondsRemaining -= 15;
+
+  }
+  currentIndex++;
+  displayQuestion();
+};
+
+
+
