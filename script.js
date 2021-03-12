@@ -40,14 +40,17 @@ var startDiv = document.querySelector(".start-game");
 var gameDiv = document.getElementById("game-div");
 var secondsRemaining = 75;
 var choicesButtons = document.getElementById("answerChoicesDisplay");
+var resultsWord = document.getElementById("results");
 var currentIndex = 0;
 var userChoice;
 startBtn.addEventListener("click", startGame);
+
 
 function startGame() {
   startDiv.classList.add("hide");
   startTimer()
 }
+
 
 function startTimer(){
   displayQuestion();
@@ -56,13 +59,18 @@ function startTimer(){
   
     var timerDisplay = document.getElementById("timer-display");
     timerDisplay.textContent = secondsRemaining;
-
+    
   }, 1000);
+  
 }
 
 console.log(allQuestions.length);
 
 function displayQuestion() {
+  if(secondsRemaining === 0 || currentIndex === 5){
+    resultsWord.innerHTML = "";
+    gameOver();
+  } ad
   gameDiv.innerHTML= "";
   choicesButtons.innerHTML="";
   var questionTitle = document.createElement("h1");
@@ -76,6 +84,7 @@ function displayQuestion() {
     choicesEl.textContent = choices[i]
     choicesEl.onclick = checkAnswer;
   };
+
 }
 
 function checkAnswer(){
@@ -84,16 +93,34 @@ function checkAnswer(){
   userChoice = this.textContent;  
   if(userChoice === answer){
     console.log("yas");
-    secondsRemaining += 15;
+    correctAnswer();
   }
   else{
     console.log("oof.");
-    secondsRemaining -= 15;
-
+  incorrectAnswer();
   }
   currentIndex++;
+  console.log(currentIndex);
   displayQuestion();
 };
 
+function correctAnswer (){
+  resultsWord.innerHTML = "";
+  var displayCorrect = document.createElement("p");
+  displayCorrect.textContent = "You're Correct!";
+  resultsWord.appendChild(displayCorrect)
+  secondsRemaining += 15; 
+};
 
+function incorrectAnswer(){
+  resultsWord.innerHTML = "";
+  var displayIncorrect = document.createElement("p");
+  displayIncorrect.textContent = "You're incorrect";
+  resultsWord.appendChild(displayIncorrect)
+  secondsRemaining -= 15;
+};
 
+function gameOver(){
+
+  console.log("You ran out of time or you don't have anymore questions.")
+};
