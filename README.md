@@ -6,7 +6,7 @@ You will be able to Navigate through a quiz made from javascript. Press start to
 
 # Image
 
-![Quiz Picture](QuizPicture.png)
+![Quiz Picture](preview.png)
 
 # Links
 
