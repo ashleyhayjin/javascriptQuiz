@@ -43,6 +43,7 @@ var choicesButtons = document.getElementById("answerChoicesDisplay");
 var resultsWord = document.getElementById("results");
 var currentIndex = 0;
 var userChoice;
+var score = 0;
 startBtn.addEventListener("click", startGame);
 
 
@@ -58,8 +59,14 @@ function startTimer(){
     secondsRemaining -= 1;
   
     var timerDisplay = document.getElementById("timer-display");
-    timerDisplay.textContent = secondsRemaining;
-    
+    timerDisplay.textContent = "Time left: " + secondsRemaining;
+  if(secondsRemaining <= 0 || currentIndex === 5){
+      clearInterval(timer)
+      resultsWord.innerHTML = "";
+      gameDiv.innerHTML = "";
+      choicesButtons.innerHTML = "";
+      gameOver();
+  } 
   }, 1000);
   
 }
@@ -67,10 +74,7 @@ function startTimer(){
 console.log(allQuestions.length);
 
 function displayQuestion() {
-  if(secondsRemaining === 0 || currentIndex === 5){
-    resultsWord.innerHTML = "";
-    gameOver();
-  } ad
+ 
   gameDiv.innerHTML= "";
   choicesButtons.innerHTML="";
   var questionTitle = document.createElement("h1");
@@ -110,6 +114,7 @@ function correctAnswer (){
   displayCorrect.textContent = "You're Correct!";
   resultsWord.appendChild(displayCorrect)
   secondsRemaining += 15; 
+  score++;
 };
 
 function incorrectAnswer(){
@@ -117,10 +122,18 @@ function incorrectAnswer(){
   var displayIncorrect = document.createElement("p");
   displayIncorrect.textContent = "You're incorrect";
   resultsWord.appendChild(displayIncorrect)
+  if(secondsRemaining === 0){
+    gameOver();
+  } else{
   secondsRemaining -= 15;
+  };
 };
 
 function gameOver(){
-
   console.log("You ran out of time or you don't have anymore questions.")
+  secondsRemaining === 0;
+  clearInterval(timer);
+  console.log(score);
+  localStorage.setItem("score", score);
+  window.location.href = "highscore.html";
 };

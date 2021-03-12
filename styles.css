@@ -10,3 +10,8 @@ body {
     justify-content: center;
     text-align: center;
 }
+
+#timer-display {
+    text-align: right;
+}
+
